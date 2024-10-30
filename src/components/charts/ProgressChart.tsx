@@ -2,25 +2,25 @@ import React from "react";
 
 const progressData = [
   {
-    title: "Progress 1",
+    title: "Purchasing",
     value: 70,
     bgColor: "#FFF5CC",
     fillColor: "#D7A53F",
   },
   {
-    title: "Progress 2",
+    title: "Returns",
     value: 30,
     bgColor: "#F3E5F5",
     fillColor: "#7B1FA2",
   },
   {
-    title: "Progress 3",
+    title: "Requests",
     value: 50,
     bgColor: "#CCF8FE",
     fillColor: "#02A0FC",
   },
   {
-    title: "Progress 4",
+    title: "Cancel",
     value: 90,
     bgColor: "#FFE5D3",
     fillColor: "#FF3A29",
@@ -52,27 +52,26 @@ const ProgressChart: React.FC<ProgressChartProps> = ({ style }) => {
       </div>
 
       {/* Radio Buttons */}
-      <div className="flex justify-between items-center mb-6">
-        {["Option 1", "Option 2", "Option 3", "Option 4"].map(
-          (label, index) => (
-            <label key={index} className="flex items-center gap-2">
-              <input
-                type="radio"
-                name="clientOption"
-                value={label}
-                className="appearance-none w-4 h-4 border border-[#956F17] rounded-full checked:bg-[#956F17] checked:border-[#956F17] focus:outline-none"
-              />
-              <span className="text-gray-700">{label}</span>
-            </label>
-          )
-        )}
+
+      <div className="mt-[5px] mb-[23px] text-base flex items-center space-x-8">
+        {["Purchasing", "Returns", "Request", "cancel"].map((label, index) => (
+          <label key={index} className="flex items-center gap-2">
+            <input
+              type="radio"
+              name="clientOption"
+              value={label}
+              className="appearance-none w-3 h-3 border border-[#956F17] rounded-full checked:bg-[#956F17] checked:border-[#956F17] focus:outline-none"
+            />
+            <span className=" text-base font-medium">{label}</span>
+          </label>
+        ))}
       </div>
 
       {/* Progress Bars */}
       <div className="space-y-4">
         {progressData.map((progress, index) => (
           <div key={index} className="flex flex-col">
-            <span className="text-gray-600 mb-1">{progress.title}</span>
+            <span className="text-base font-medium mb-1">{progress.title}</span>
             <div
               className="w-full rounded-full h-2"
               style={{

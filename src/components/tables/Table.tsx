@@ -45,6 +45,20 @@ const Table: React.FC<TableProps> = ({ style }) => {
         status: "Pending",
         invoice: "#1237",
       },
+      {
+        date: "1 Dec",
+        billingName: "John Doe",
+        amount: "$100",
+        status: "Paid",
+        invoice: "#1234",
+      },
+      {
+        date: "8 Dec",
+        billingName: "Jane Smith",
+        amount: "$200",
+        status: "Pending",
+        invoice: "#1235",
+      },
     ],
     []
   );
@@ -64,11 +78,20 @@ const Table: React.FC<TableProps> = ({ style }) => {
     useTable({ columns, data });
 
   return (
-    <ChartContainer style={style}>
+    <ChartContainer style={{ position: "relative", ...style }}>
       <h2 className="text-lg font-medium text-[#493421]">Recent Order</h2>
-      <hr className="border-[#493421] my-2" />
+      <div
+        style={{
+          position: "absolute",
+          top: "40px", // Adjust this based on where you want the line to appear
+          left: 0,
+          right: 0,
+          height: "0.7px",
+          backgroundColor: "#493421",
+        }}
+      />
 
-      <div style={{ maxHeight: "270px", overflowY: "auto" }}>
+      <div style={{ maxHeight: "270px", overflowY: "auto", paddingTop: "8px" }}>
         <table
           {...getTableProps()}
           style={{
@@ -92,8 +115,9 @@ const Table: React.FC<TableProps> = ({ style }) => {
                   <th
                     {...column.getHeaderProps()}
                     style={{
-                      padding: "10px",
-                      fontWeight: "bold",
+                      padding: "3px 10px",
+                      fontWeight: "500",
+                      fontSize: "14px",
                       textAlign: "left",
                     }}
                   >
@@ -110,17 +134,23 @@ const Table: React.FC<TableProps> = ({ style }) => {
               let textColor = "#000000";
               switch (i % 4) {
                 case 0:
-                  backgroundColor = "#493421";
+                  backgroundColor = "#F0CF83";
                   textColor = "#FFFFFF";
                   break;
                 case 1:
-                  backgroundColor = "#F0CF83";
-                  break;
-                case 2:
                   backgroundColor = "#D7A53F";
                   break;
-                case 3:
+                case 2:
                   backgroundColor = "#FFFFFF";
+                  break;
+                case 3:
+                  backgroundColor = "#F0CF83";
+                  break;
+                case 4:
+                  backgroundColor = "#FFFFFF";
+                  break;
+                case 5:
+                  backgroundColor = "#F0CF83";
                   break;
                 default:
                   backgroundColor = "#FFFFFF";
@@ -131,8 +161,10 @@ const Table: React.FC<TableProps> = ({ style }) => {
                   {...row.getRowProps()}
                   style={{
                     backgroundColor,
-                    color: textColor,
-                    borderRadius: "10px", // Apply border-radius to each row
+                    color: " #000000",
+                    fontSize: "12px",
+                    fontWeight: "500",
+                    borderRadius: "10px",
                     overflow: "hidden",
                   }}
                 >
@@ -140,7 +172,7 @@ const Table: React.FC<TableProps> = ({ style }) => {
                     <td
                       {...cell.getCellProps()}
                       style={{
-                        padding: "10px",
+                        padding: "3px 10px",
                         borderBottom: "1px solid transparent",
                       }}
                     >

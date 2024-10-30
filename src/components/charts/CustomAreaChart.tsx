@@ -59,11 +59,13 @@ const CustomAreaChart: React.FC<CustomAreaChartProps> = ({
         borderRadius: "10px",
         padding: "20px",
         boxSizing: "border-box",
+        position: "relative",
         ...style,
       }}
       onMouseEnter={() => setShowGrid(showGridOnHover)}
       onMouseLeave={() => setShowGrid(false)}
     >
+      {/* Title */}
       <div>
         <span className="text-lg font-medium inline-flex mb-[17px]">
           {title}
@@ -71,6 +73,7 @@ const CustomAreaChart: React.FC<CustomAreaChartProps> = ({
         <hr className="bg-[#7F7F7F]" />
       </div>
 
+      {/* Radio Options */}
       <div className="mt-[5px] mb-[23px] text-base flex items-center space-x-8">
         {radioOptions.map((label, index) => (
           <label key={index} className="flex items-center gap-2">
@@ -78,26 +81,52 @@ const CustomAreaChart: React.FC<CustomAreaChartProps> = ({
               type="radio"
               name="clientOption"
               value={label}
-              className="appearance-none w-4 h-4 border border-[#956F17] rounded-full checked:bg-[#956F17] checked:border-[#956F17] focus:outline-none"
+              className="appearance-none w-3 h-3 border border-[#956F17] rounded-full checked:bg-[#956F17] checked:border-[#956F17] focus:outline-none"
             />
-            <span className="text-gray-700">{label}</span>
+            <span className=" text-base font-medium">{label}</span>
           </label>
         ))}
       </div>
 
-      <div style={{ width: "100%", height: "calc(100% - 90px)", padding: "0" }}>
+      {/* Chart */}
+      <div
+        style={{
+          width: "100%",
+          height: "calc(100% - 90px)",
+          position: "relative",
+        }}
+      >
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart
             data={data}
-            margin={{ top: 10, right: 0, left: 0, bottom: 0 }}
+            margin={{ top: 20, right: 20, left: 20, bottom: 40 }} // Add margins to give space for labels
           >
             <CartesianGrid
               strokeDasharray="3 3"
               horizontal={true}
               vertical={showGrid}
             />
-            <XAxis dataKey="name" tickMargin={10} />
-            <YAxis domain={yAxisDomain} ticks={yAxisTicks} />
+            <XAxis
+              dataKey="name"
+              tickMargin={10} // Adjust spacing between X-axis line and labels
+              axisLine={false}
+              tick={{
+                fontSize: "12px",
+                dy: 20,
+                textAnchor: "middle",
+              }}
+            />
+            <YAxis
+              domain={yAxisDomain}
+              ticks={yAxisTicks}
+              width={40}
+              axisLine={false}
+              tick={{
+                fontSize: "12px",
+                dx: -20, // Reduce horizontal space for better fit
+                textAnchor: "end",
+              }}
+            />
             <Tooltip />
             {showLegend && <Legend />}
             {areas.map((area, index) => (

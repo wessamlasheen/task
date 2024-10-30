@@ -40,12 +40,16 @@ const footerIcons = [{ icon: setting }, { icon: theme }, { icon: shutdown }];
 const MainLayout = () => {
   return (
     <main className="flex">
-      <aside className="w-[78px] bg-primary rounded-tr-[30px] rounded-br-[30px] text-white flex flex-col items-center">
+      <aside className="w-[78px] flex-shrink-0 bg-primary rounded-tr-[30px] rounded-br-[30px] text-white flex flex-col items-center">
         <div className="mb-[65px] mt-[29px]">
-          <img src={logo} alt="Logo" className="w-[60px] h-[61px]" />
+          <img
+            src={logo}
+            alt="Logo"
+            className="w-[60px] h-[61px] object-cover"
+          />
         </div>
 
-        <nav className="flex flex-col space-y-[35px] mt-4">
+        <nav className="flex flex-col gap-4 ">
           {navItems.map((item) => (
             <NavLink
               key={item.route}
@@ -69,7 +73,7 @@ const MainLayout = () => {
       </aside>
 
       <div className="flex flex-col flex-1  pl-[26px] pr-[17px]">
-        <header className="bg-white   flex justify-between items-center">
+        <header className="bg-white   flex gap-[460px] items-center">
           <div className="flex items-center space-x-4 mt-[54px]">
             <NavLink
               to={ROUTES.main}
@@ -82,12 +86,12 @@ const MainLayout = () => {
             </NavLink>
           </div>
 
-          <div className="flex items-center space-x-[14px]">
-            <div className="relative">
+          <div className="flex items-center ">
+            <div className="relative mr-[14px]">
               <input
                 type="text"
                 placeholder="Search..."
-                className="text-base font-medium text-[#7F7F7F] border border-[#7F7F7F] rounded-[10px] h-[61px] pl-[18px] pr-[364px] focus:outline-none"
+                className="text-base font-medium text-[#7F7F7F] border border-[#7F7F7F] rounded-[10px] h-[61px] w-[469px] pl-[17px] focus:outline-none"
               />
               <img
                 src={searchIcon}
@@ -95,8 +99,8 @@ const MainLayout = () => {
                 className="absolute right-[18px] top-1/2 transform -translate-y-1/2 h-6 w-6"
               />
             </div>
-            <button className="p-2 hover:bg-gray-100 rounded-full">
-              <img src={bell} alt="Notifications" className="h-5 w-5" />
+            <button className="mr-[10px] hover:bg-gray-100 rounded-full">
+              <img src={bell} alt="Notifications" className="h-6 w-6" />
             </button>
             <div className="flex items-center space-x-2">
               <img src={user} alt="User icon" className="h-6 w-6" />

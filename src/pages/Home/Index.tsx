@@ -18,7 +18,7 @@ const Home = () => {
 
   return (
     <div className="bg-[#F8F7F7] py-7 px-[24px] mb-8">
-      <div className="flex flex-wrap gap-[25px]  mb-8">
+      <div className="flex  gap-[25px]  mb-8">
         {cardData.map((card, index) => (
           <Card key={index} subtitle={card.subtitle} number={card.number} />
         ))}
@@ -33,7 +33,14 @@ const Home = () => {
               { name: "16Dec", value: 60 },
               { name: "31Dec", value: 160 },
             ]}
-            areas={[{ dataKey: "value", fill: "#bccae6", stroke: "#109CF1" }]}
+            areas={[
+              {
+                dataKey: "value",
+                fill: "#109CF1",
+                stroke: "#109CF1",
+                fillOpacity: parseFloat("0.1"),
+              },
+            ]}
             radioOptions={["New Comers"]}
           />
           <CustomLineChart
@@ -51,7 +58,7 @@ const Home = () => {
             showArea={false}
             radioOptions={["imported shipment", "distributed shipment"]}
           />
-          <Table />
+          <Table style={{ padding: "8px 9px 25px 9px" }} />
         </div>
         <div className="flex flex-col gap-7">
           <ProgressChart />

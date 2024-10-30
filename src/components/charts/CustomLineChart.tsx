@@ -8,6 +8,7 @@ import {
   Tooltip,
   ResponsiveContainer,
   Area,
+  Legend,
 } from "recharts";
 
 // Define types for props
@@ -30,6 +31,9 @@ interface CustomLineChartProps {
   height?: string;
   style?: React.CSSProperties;
   radioOptions?: string[];
+  yAxisDomain?: [number, number];
+  yAxisTicks?: number[];
+  showLegend?: boolean;
 }
 
 const CustomLineChart: React.FC<CustomLineChartProps> = ({
@@ -42,6 +46,9 @@ const CustomLineChart: React.FC<CustomLineChartProps> = ({
   height = "478px",
   style,
   radioOptions = ["Hover to show the details"],
+  yAxisDomain = [0, 200],
+  yAxisTicks = [0, 50, 100, 150, 200],
+  showLegend = false,
 }) => {
   const [showGrid, setShowGrid] = useState(false);
 
@@ -70,14 +77,14 @@ const CustomLineChart: React.FC<CustomLineChartProps> = ({
       {/* Dynamic Radio Buttons */}
       <div className="mt-[5px] mb-[23px] text-base flex items-center gap-[32px]">
         {radioOptions.map((label, index) => (
-          <label key={index} className="flex items-center gap-[6px]">
+          <label key={index} className="flex items-center gap-2">
             <input
               type="radio"
-              name="details"
+              name="clientOption"
               value={label}
-              className="appearance-none w-4 h-4 border border-[#956F17] rounded-full checked:bg-[#956F17] checked:border-[#956F17] focus:outline-none"
+              className="appearance-none w-3 h-3 border border-[#956F17] rounded-full checked:bg-[#956F17] checked:border-[#956F17] focus:outline-none"
             />
-            <span>{label}</span>
+            <span className=" text-base font-medium">{label}</span>
           </label>
         ))}
       </div>
@@ -85,15 +92,38 @@ const CustomLineChart: React.FC<CustomLineChartProps> = ({
       {/* Chart */}
       <div style={{ width: "100%", height: "calc(100% - 90px)" }}>
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={data}>
+          <LineChart
+            data={data}
+            margin={{ top: 20, right: 20, left: 20, bottom: 40 }} // Same margins as AreaChart
+          >
             <CartesianGrid
               strokeDasharray="3 3"
               horizontal={true}
               vertical={showGrid}
             />
-            <XAxis dataKey="name" />
-            <YAxis domain={[0, 200]} ticks={[0, 50, 100, 150, 200]} />
+            <XAxis
+              dataKey="name"
+              tickMargin={10}
+              axisLine={false}
+              tick={{
+                fontSize: "12px", // Same font size as AreaChart XAxis
+                dy: 20, // Same vertical spacing
+                textAnchor: "middle",
+              }}
+            />
+            <YAxis
+              domain={yAxisDomain}
+              ticks={yAxisTicks}
+              width={40}
+              axisLine={false}
+              tick={{
+                fontSize: "12px", // Same font size as AreaChart YAxis
+                dx: -20, // Same horizontal spacing
+                textAnchor: "end",
+              }}
+            />
             <Tooltip formatter={(value) => [value, ""]} />
+            {showLegend && <Legend />}
 
             {/* Area Background */}
             {showArea && (
@@ -102,6 +132,7 @@ const CustomLineChart: React.FC<CustomLineChartProps> = ({
                 dataKey={lines[0].dataKey}
                 fill={areaFill}
                 stroke="none"
+                fillOpacity={0.1}
               />
             )}
 
