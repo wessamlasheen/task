@@ -4,19 +4,24 @@ import MainLayout from "../layouts/Main/Index";
 import Home from "../pages/Home/Index";
 import Profile from "../pages/Profile/Index";
 
-export const router = createBrowserRouter([
+export const router = createBrowserRouter(
+  [
+    {
+      path: ROUTES.main,
+      element: <MainLayout />,
+      children: [
+        {
+          index: true,
+          element: <Home />,
+        },
+        {
+          path: ROUTES.Profile,
+          element: <Profile />,
+        },
+      ],
+    },
+  ],
   {
-    path: ROUTES.main,
-    element: <MainLayout />,
-    children: [
-      {
-        index: true,
-        element: <Home />,
-      },
-      {
-        path: ROUTES.Profile,
-        element: <Profile />,
-      },
-    ],
-  },
-]);
+    basename: "/task", // Set the base path here
+  }
+);
