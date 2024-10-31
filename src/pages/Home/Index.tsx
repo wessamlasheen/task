@@ -10,10 +10,10 @@ const Home = () => {
   const [cardData] = useState([
     { subtitle: "Tasks Completed", number: "70" },
     { subtitle: "New Messages", number: "200" },
-    { subtitle: "Pending Approvals", number: "1,800" },
+    { subtitle: "Pending ", number: "1,800" },
     { subtitle: "New Comments", number: "1,500" },
     { subtitle: "Files Uploaded", number: "20,000" },
-    { subtitle: "Projects in Progress", number: "1,000" },
+    { subtitle: "Projects in ", number: "1,000" },
   ]);
 
   return (

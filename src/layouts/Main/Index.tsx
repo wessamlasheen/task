@@ -1,4 +1,3 @@
-import { NavLink, Outlet } from "react-router-dom";
 import { ROUTES } from "../../constants/routes";
 import logo from "../../assets/imgs/logo.png";
 import homeIcon from "../../assets/imgs/svg/Vector (1).svg";
@@ -18,9 +17,10 @@ import searchIcon from "../../assets/imgs/svg/search.svg";
 import user from "../../assets/imgs/svg/user.svg";
 import homeSecond from "../../assets/imgs/svg/homeSecond.svg";
 import bell from "../../assets/imgs/svg/bell.svg";
+import Home from "../../pages/Home/Index";
 
 const navItems = [
-  { route: ROUTES.main, label: "Home", icon: homeIcon },
+  { route: ROUTES.main, label: "Home", icon: homeIcon, isActive: true },
   { route: ROUTES.Profile, label: "profile", icon: ProfileIcon },
   { route: ROUTES.dashboard, label: "Dashboard", icon: dashIcon },
   { route: ROUTES.users, label: "users", icon: usersIcon },
@@ -51,17 +51,17 @@ const MainLayout = () => {
 
         <nav className="flex flex-col gap-4 ">
           {navItems.map((item) => (
-            <NavLink
+            <a
               key={item.route}
-              to={item.route}
-              className={({ isActive }) =>
-                `p-[10px] rounded-[10px] ${isActive ? "bg-secondary" : ""}`
-              }
+              href={item.route}
+              className={`p-[10px] rounded-[10px] ${
+                item.isActive ? "bg-secondary" : ""
+              }`}
             >
               <span>
                 <img src={item.icon} alt={`${item.label} icon`} />
               </span>
-            </NavLink>
+            </a>
           ))}
         </nav>
 
@@ -75,15 +75,15 @@ const MainLayout = () => {
       <div className="flex flex-col flex-1  pl-[26px] pr-[17px]">
         <header className="bg-white   flex gap-[460px] items-center">
           <div className="flex items-center space-x-4 mt-[54px]">
-            <NavLink
-              to={ROUTES.main}
+            <a
+              href={ROUTES.main}
               className="flex gap-[6px] py-[18px] px-8 rounded-tl-[10px] rounded-tr-[10px] bg-[#F8F7F7]"
             >
               <img src={homeSecond} alt="Home icon" className="h-6 w-6 " />
               <span className="text-xl font-semibold  text-secondary">
                 Home
               </span>
-            </NavLink>
+            </a>
           </div>
 
           <div className="flex items-center ">
@@ -112,7 +112,7 @@ const MainLayout = () => {
         </header>
 
         <div className="overflow-y-auto">
-          <Outlet />
+          <Home />
         </div>
       </div>
     </main>
