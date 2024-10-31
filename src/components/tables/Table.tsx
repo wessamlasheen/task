@@ -131,11 +131,11 @@ const Table: React.FC<TableProps> = ({ style }) => {
             {rows.map((row, i) => {
               prepareRow(row);
               let backgroundColor;
-              let textColor = "#000000";
+
               switch (i % 4) {
                 case 0:
                   backgroundColor = "#F0CF83";
-                  textColor = "#FFFFFF";
+
                   break;
                 case 1:
                   backgroundColor = "#D7A53F";
